@@ -229,8 +229,12 @@ class Window(window.Window):
             mode = glfw.glfwGetVideoMode(monitor)
             self._width, self._height = mode[:2]
 
+        shared_native_window = None
+        if context is not None:
+            shared_native_window = context._native_window
+
         self._native_window = glfw.glfwCreateWindow(self._width, self._height,
-                                                    self._title, monitor, None)
+                                                    self._title, monitor, shared_native_window)
 
 
         if not self._native_window:
